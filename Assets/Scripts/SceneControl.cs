@@ -27,6 +27,7 @@ public class SceneControl : MonoBehaviour
             if (IsVRActivated)
             {
                 player.GetComponent<KeyboardMouseMovement>().enabled = false;
+                player.GetComponent<CameraControl>().enabled = false;
                 GameObject mainCamera = GameObject.Find("StandardCamera");
                 mainCamera.SetActive(false);
             }
