@@ -32,13 +32,15 @@ public class KeyboardMouseMovement : MonoBehaviour
         {
             if (!isCrouched)
             {
-                cam.transform.Translate(0, -0.5f, 0);
-                controller.height /= 2;
+                cam.transform.Translate(0, -1, 0);
+                controller.height = controller.height - 1;
+                controller.center = new Vector3(0, 0.5f, 0);
             }
             else if (isCrouched)
             {
-                cam.transform.Translate(0, 0.5f, 0);
-                controller.height *= 2;
+                cam.transform.Translate(0, 1, 0);
+                controller.height = controller.height + 1;
+                controller.center = new Vector3(0, 1, 0);
             }
             isCrouched = !isCrouched;
         }
