@@ -17,12 +17,15 @@ public class ContinuousMovement : MonoBehaviour
     private CharacterController character;
     private CharacterMovement movement;
 
+    private SphereCollider soundShpere;
+
     // Start is called before the first frame update
     private void Start()
     {
         character = GetComponent<CharacterController>();
         movement = GetComponent<CharacterMovement>();
         rig = GetComponent<XRRig>();
+        soundShpere = GetComponent<SphereCollider>();
     }
 
     // Update is called once per frame
@@ -41,6 +44,9 @@ public class ContinuousMovement : MonoBehaviour
         Vector3 direction = headYaw * new Vector3(inputAxis.x, 0, inputAxis.y);
 
         movement.Movement(direction);
+
+        float speed = Mathf.Sqrt(Mathf.Pow(direction.x, 2) + Mathf.Pow(direction.z, 2));
+        soundShpere.radius = speed * 2;
     }
 
     private void CapsuleFollowHeadset()
