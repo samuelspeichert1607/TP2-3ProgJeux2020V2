@@ -12,6 +12,8 @@ public class KeyboardMouseMovement : MonoBehaviour
 
     private bool isCrouched;
 
+    private SphereCollider soundShpere;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -19,16 +21,28 @@ public class KeyboardMouseMovement : MonoBehaviour
         controller = GetComponent<CharacterController>();
         Transform trans = GetComponent<Transform>().Find("StandardCamera");
         cam = trans.gameObject;
+        soundShpere = GetComponent<SphereCollider>();
     }
 
     // Update is called once per frame
     private void Update()
     {
         Vector3 direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        if (isCrouched)
+        {
+            direction = new Vector3(Input.GetAxis("Horizontal") / 2, 0, Input.GetAxis("Vertical") / 2);
+        }
+        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        {
+            direction = new Vector3(Input.GetAxis("Horizontal") * 2, 0, Input.GetAxis("Vertical") * 2);
+        }
         direction = transform.TransformDirection(direction);
         movement.Movement(direction);
 
-        if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.LeftControl))
+        float speed = Mathf.Sqrt(Mathf.Pow(direction.x, 2) + Mathf.Pow(direction.z, 2));
+        soundShpere.radius = speed * 2;
+
+        if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.RightControl))
         {
             if (!isCrouched)
             {

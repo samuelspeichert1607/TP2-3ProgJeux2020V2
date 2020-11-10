@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: 142023784}
   - component: {fileID: 142023783}
   m_Layer: 0
-  m_Name: Table (1)
+  m_Name: crouch test
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -304,7 +304,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 142023782}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.43, y: 2.2, z: -0.035696983}
+  m_LocalPosition: {x: -2.62, y: 2.2, z: 2.21}
   m_LocalScale: {x: 1, y: 1, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
@@ -710,6 +710,7 @@ GameObject:
   - component: {fileID: 524233967}
   - component: {fileID: 524233969}
   - component: {fileID: 524233971}
+  - component: {fileID: 524233972}
   m_Layer: 10
   m_Name: VR Rig
   m_TagString: Untagged
@@ -865,6 +866,19 @@ MonoBehaviour:
   sensHorizontal: 10
   sensVertical: 10
   _rotationX: 0
+--- !u!135 &524233972
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 524233962}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &751326891
 GameObject:
   m_ObjectHideFlags: 0
