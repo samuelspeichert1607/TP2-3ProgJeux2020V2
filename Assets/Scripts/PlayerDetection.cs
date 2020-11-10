@@ -37,7 +37,7 @@ public class PlayerDetection : MonoBehaviour
                 Transform camera = player.GetComponent<Transform>().Find("StandardCamera");
                 Vector3 direction = camera.position - visionPoint.position;
                 RaycastHit[] hits;
-                hits = Physics.RaycastAll(visionPoint.position, direction, Mathf.Sqrt(Mathf.Pow(direction.x, 2) + Mathf.Pow(direction.z, 2)));
+                hits = Physics.RaycastAll(visionPoint.position, direction, Mathf.Sqrt(Mathf.Pow(direction.x, 2) + Mathf.Pow(direction.y, 2) + Mathf.Pow(direction.z, 2)));
                 bool canSeeObject = true;
                 for (int j = 0; j < hits.Length; j++)
                 {
@@ -70,7 +70,7 @@ public class PlayerDetection : MonoBehaviour
                     Transform sound = player.GetComponent<Transform>().Find("SoundMade");
                     Vector3 direction = sound.position - centerOfMass.position;
                     RaycastHit[] hits;
-                    hits = Physics.RaycastAll(centerOfMass.position, direction, Mathf.Sqrt(Mathf.Pow(direction.x, 2) + Mathf.Pow(direction.z, 2)));
+                    hits = Physics.RaycastAll(centerOfMass.position, direction, Mathf.Sqrt(Mathf.Pow(direction.x, 2) + Mathf.Pow(direction.y, 2) + Mathf.Pow(direction.z, 2)));
                     bool canHearObject = true;
                     for (int j = 0; j < hits.Length; j++)
                     {
