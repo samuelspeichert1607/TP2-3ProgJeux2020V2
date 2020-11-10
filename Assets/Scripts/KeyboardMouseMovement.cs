@@ -21,7 +21,7 @@ public class KeyboardMouseMovement : MonoBehaviour
         controller = GetComponent<CharacterController>();
         Transform trans = GetComponent<Transform>().Find("StandardCamera");
         cam = trans.gameObject;
-        soundShpere = GetComponent<SphereCollider>();
+        soundShpere = GetComponentInChildren<SphereCollider>();
     }
 
     // Update is called once per frame

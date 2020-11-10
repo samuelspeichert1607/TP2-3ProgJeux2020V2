@@ -25,7 +25,7 @@ public class ContinuousMovement : MonoBehaviour
         character = GetComponent<CharacterController>();
         movement = GetComponent<CharacterMovement>();
         rig = GetComponent<XRRig>();
-        soundShpere = GetComponent<SphereCollider>();
+        soundShpere = GetComponentInChildren<SphereCollider>();
     }
 
     // Update is called once per frame
