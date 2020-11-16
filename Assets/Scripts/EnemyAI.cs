@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-    private enum State
+    public enum State
     {
         Home,
         Player,
@@ -23,15 +23,15 @@ public class EnemyAI : MonoBehaviour
 
     private int currentNode;
 
-    private Vector3 currentDestination;
+    public Vector3 currentDestination;
 
     private bool hasDestination;
 
     private Transform centerOfMass;
 
-    private State currentState;
+    public State currentState;
 
-    private float timeLeftUntilGiveUpChase;
+    public float timeLeftUntilGiveUpChase;
 
     public List<GameObject> home;
 
@@ -70,6 +70,8 @@ public class EnemyAI : MonoBehaviour
                 {
                     currentPath = pathFinding.A_Star(transform.position, detector.detectedPlayer.transform.position);
                     currentNode = 0;
+                    currentDestination = currentPath[currentNode].getPosition();
+                    hasDestination = true;
                 }
                 else
                 {
@@ -93,26 +95,18 @@ public class EnemyAI : MonoBehaviour
         else if ((timeLeftUntilGiveUpChase <= 0 && currentState == State.Player) || (currentState == State.Home && !hasDestination))
         {
             currentState = State.Home;
-            GameObject randomPointInHome = home[Random.Range(0, home.Count - 1)];
-            if (!canReachDestinationDirectly(randomPointInHome.transform.position))
-            {
-                currentPath = pathFinding.A_Star(transform.position, randomPointInHome.transform.position);
-                currentNode = 0;
-            }
-            else
-            {
-                currentPath = null;
-                currentNode = 0;
-                currentDestination = randomPointInHome.transform.position;
-                hasDestination = true;
-            }
+            GameObject randomPointInHome = home[Random.Range(0, home.Count)];
+            currentPath = pathFinding.A_Star(transform.position, randomPointInHome.transform.position);
+            currentNode = 0;
+            currentDestination = currentPath[currentNode].getPosition();
+            hasDestination = true;
         }
         
 
         //move
         if (hasDestination)
         {
-            Move(currentDestination, detector.detectedPlayer != null);
+            Move(currentDestination, detector.detectedPlayer == null);
             if (centerOfMass.position == currentDestination)
             {
                 currentDestination = new Vector3();
@@ -136,6 +130,7 @@ public class EnemyAI : MonoBehaviour
                 else
                 {
                     currentDestination = currentPath[currentNode].getPosition();
+                    hasDestination = true;
                 }
             }
         }
@@ -188,70 +183,23 @@ public class EnemyAI : MonoBehaviour
     public void Move(Vector3 destination, bool turn)
     {
         Vector3 currentPosition = centerOfMass.position;
-        float newX = currentPosition.x;
-        float newY = currentPosition.y;
-        float newZ = currentPosition.y;
-        if (currentPosition.x < destination.x)
-        {
-            newX += speed * Time.deltaTime;
-            if (newX > destination.x)
-            {
-                newX = destination.x;
-            }
-        }
-        else if (currentPosition.x > destination.x)
-        {
-            newX -= speed * Time.deltaTime;
-            if (newX < destination.x)
-            {
-                newX = destination.x;
-            }
-        }
-        if (currentPosition.y < destination.y)
-        {
-            newY += speed * Time.deltaTime;
-            if (newY > destination.y)
-            {
-                newY = destination.y;
-            }
-        }
-        else if (currentPosition.y > destination.y)
-        {
-            newY -= speed * Time.deltaTime;
-            if (newY < destination.y)
-            {
-                newY = destination.y;
-            }
-        }
-        if (currentPosition.z < destination.z)
-        {
-            newZ += speed * Time.deltaTime;
-            if (newZ > destination.z)
-            {
-                newZ = destination.z;
-            }
-        }
-        else if (currentPosition.z > destination.z)
-        {
-            newZ -= speed * Time.deltaTime;
-            if (newZ < destination.z)
-            {
-                newZ = destination.z;
-            }
-        }
-        Vector3 newPosition = new Vector3(newX, newY, newZ);
 
         if (turn)
         {
-            Turn(newPosition);
+            Turn(destination);
         }
-        transform.Translate(newPosition - currentPosition);
+        transform.position = Vector3.MoveTowards(currentPosition, destination, speed * Time.deltaTime);
     }
 
     public void Turn(Vector3 destination)
     {
-        Vector3 mouvement = destination - transform.position;
-        float angle = Mathf.Atan2(mouvement.y, mouvement.x) * Mathf.Rad2Deg;
-        transform.Rotate(new Vector3(0,angle,0));
+        Vector3 direction = (destination - transform.position).normalized;
+
+        //create the rotation we need to be in to look at the target
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+
+        //rotate us over time according to speed until we are in the required rotation
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, speed * Time.deltaTime / 2);
+
     }
 }

@@ -62,11 +62,11 @@ public class Node : MonoBehaviour
 
     public static bool operator ==(Node left, Node right)
     {
-        return left.getPosition() == right.getPosition();
+        return Equals(left, right);
     }
 
     public static bool operator !=(Node left, Node right)
     {
-        return left.getPosition() != right.getPosition();
+        return !Equals(left, right);
     }
 }
