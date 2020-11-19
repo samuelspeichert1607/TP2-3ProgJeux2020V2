@@ -44,7 +44,16 @@ public class Graph : MonoBehaviour
             List<Node> neighbors = Nodes[i].getNeighbors();
             for (int j = 0; j < neighbors.Count; j++)
             {
-                Debug.DrawLine(position, neighbors[j].getPosition(), Color.green);
+                List<Node> neighborsNeighbors = neighbors[j].getNeighbors();
+                for (int k = 0; k < neighborsNeighbors.Count; k++)
+                {
+                    if (neighborsNeighbors[k] == Nodes[i])
+                    {
+                        Debug.DrawLine(position, neighbors[j].getPosition(), Color.green);
+                        break;
+                    }
+                    Debug.DrawLine(position, neighbors[j].getPosition(), Color.red);
+                }
             }
         }
     }
@@ -57,8 +66,8 @@ public class Graph : MonoBehaviour
 
         for (int i = 0; i < Nodes.Length; i++)
         {
-            Vector3 direction = position - Nodes[i].getPosition();
-            float currentDistance = Mathf.Sqrt(Mathf.Pow(direction.x, 2) + Mathf.Pow(direction.y, 2) + Mathf.Pow(direction.z, 2));
+            Vector3 direction = Nodes[i].getPosition() - position;
+            float currentDistance = Vector3.Distance(Nodes[i].getPosition(), position);
             if (closestNode == null || currentDistance < closestDistance)
             {
                 RaycastHit[] hits;
@@ -71,6 +80,11 @@ public class Graph : MonoBehaviour
                         ObjectAIBehavior behavior = hits[j].collider.GetComponent<ObjectAIBehavior>();
                         if (!behavior.canActorsPassThrough)
                         {
+                            Debug.Log("ok");
+                            if (Nodes[i].gameObject.name == "GameObject(15)")
+                            {
+                                Debug.Log("ok");
+                            }
                             canGoToObject = false;
                             break;
                         }
@@ -194,6 +208,10 @@ public class Graph : MonoBehaviour
                 smallestYet = fScore[i];
                 positionOfSmallest = i;
             }
+        }
+        if (positionOfSmallest == -1)
+        {
+            Debug.Log("oh no");
         }
         return positionOfSmallest;
     }

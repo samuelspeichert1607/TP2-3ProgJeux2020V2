@@ -19,9 +19,10 @@ public class Node : MonoBehaviour
         neighborsNodes = new List<Node>();
         for (int i = 0; i < neighborsObjects.Count; i++)
         {
-            Vector3 direction = getPosition() - neighborsObjects[i].transform.position;
+            Vector3 direction = neighborsObjects[i].transform.position- getPosition();
+            float distance = Vector3.Distance(neighborsObjects[i].transform.position, getPosition());
             RaycastHit[] hits;
-            hits = Physics.RaycastAll(getPosition(), direction, Mathf.Sqrt(Mathf.Pow(direction.x, 2) + Mathf.Pow(direction.y, 2) + Mathf.Pow(direction.z, 2)));
+            hits = Physics.RaycastAll(getPosition(), direction, distance);
             bool canGoToObject = true;
             for (int j = 0; j < hits.Length; j++)
             {

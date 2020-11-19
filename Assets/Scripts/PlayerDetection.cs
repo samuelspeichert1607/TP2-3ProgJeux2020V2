@@ -34,10 +34,11 @@ public class PlayerDetection : MonoBehaviour
             if (visionColliders[i] is CharacterController)
             {
                 GameObject player = visionColliders[i].gameObject;
-                Transform camera = player.GetComponent<Transform>().Find("StandardCamera");
-                Vector3 direction = camera.position - visionPoint.position;
+                Transform head = player.GetComponent<Transform>().Find("Head");
+                Vector3 direction = head.position - visionPoint.position;
+                float distance = Vector3.Distance(visionPoint.position, head.position);
                 RaycastHit[] hits;
-                hits = Physics.RaycastAll(visionPoint.position, direction, Mathf.Sqrt(Mathf.Pow(direction.x, 2) + Mathf.Pow(direction.y, 2) + Mathf.Pow(direction.z, 2)));
+                hits = Physics.RaycastAll(visionPoint.position, direction, distance);
                 bool canSeeObject = true;
                 for (int j = 0; j < hits.Length; j++)
                 {
@@ -69,8 +70,9 @@ public class PlayerDetection : MonoBehaviour
                     GameObject player = hearingColliders[i].GetComponentInParent<CharacterController>().gameObject;
                     Transform sound = player.GetComponent<Transform>().Find("SoundMade");
                     Vector3 direction = sound.position - centerOfMass.position;
+                    float distance = Vector3.Distance(centerOfMass.position, sound.position);
                     RaycastHit[] hits;
-                    hits = Physics.RaycastAll(centerOfMass.position, direction, Mathf.Sqrt(Mathf.Pow(direction.x, 2) + Mathf.Pow(direction.y, 2) + Mathf.Pow(direction.z, 2)));
+                    hits = Physics.RaycastAll(centerOfMass.position, direction, distance);
                     bool canHearObject = true;
                     for (int j = 0; j < hits.Length; j++)
                     {

@@ -11,8 +11,6 @@ public class EnemyAI : MonoBehaviour
         Target
     }
 
-    private Rigidbody body;
-
     private Graph pathFinding;
 
     private PlayerDetection detector;
@@ -23,27 +21,27 @@ public class EnemyAI : MonoBehaviour
 
     private int currentNode;
 
-    public Vector3 currentDestination;
+    private Vector3 currentDestination;
 
     private bool hasDestination;
 
     private Transform centerOfMass;
 
-    public State currentState;
+    private State currentState;
 
-    public float timeLeftUntilGiveUpChase;
+    private float timeLeftUntilGiveUpChase;
+
+    private float timeLeftUntilGiveUpDistraction;
 
     public List<GameObject> home;
 
     public float speed;
-
 
     public float timeUntilGiveUpChase;
 
     // Start is called before the first frame update
     void Start()
     {
-        body = GetComponent<Rigidbody>();
         GameObject graph = GameObject.Find("Graph");
         pathFinding = graph.GetComponent<Graph>();
         detector = GetComponent<PlayerDetection>();
@@ -59,16 +57,22 @@ public class EnemyAI : MonoBehaviour
         {
             timeLeftUntilGiveUpChase -= Time.deltaTime;
         }
+        if (timeLeftUntilGiveUpDistraction > 0)
+        {
+            timeLeftUntilGiveUpDistraction -= Time.deltaTime;
+        }
 
 
         //check state
         if (detector.detectedPlayer != null)
         {
+            Transform playerCenter = detector.detectedPlayer.GetComponent<Transform>().Find("CenterOfMass");
+            Vector3 playerPosition = playerCenter.position;
             if (currentState != State.Player || !hasDestination)
             {
-                if (!canReachDestinationDirectly(detector.detectedPlayer.transform.position))
+                if (!canReachDestinationDirectly(playerPosition))
                 {
-                    currentPath = pathFinding.A_Star(transform.position, detector.detectedPlayer.transform.position);
+                    currentPath = pathFinding.A_Star(transform.position, playerPosition);
                     currentNode = 0;
                     currentDestination = currentPath[currentNode].getPosition();
                     hasDestination = true;
@@ -77,22 +81,23 @@ public class EnemyAI : MonoBehaviour
                 {
                     currentPath = null;
                     currentNode = 0;
-                    currentDestination = detector.detectedPlayer.transform.position;
+                    currentDestination = playerPosition;
                     hasDestination = true;
                 }
                 currentState = State.Player;
             }
-            if (canReachDestinationDirectly(detector.detectedPlayer.transform.position))
+            if (canReachDestinationDirectly(playerPosition))
             {
                 currentPath = null;
                 currentNode = 0;
-                currentDestination = detector.detectedPlayer.transform.position;
+                currentDestination = playerPosition;
                 hasDestination = true;
             }
-            Turn(detector.detectedPlayer.transform.position);
+            Turn(playerPosition);
             timeLeftUntilGiveUpChase = timeUntilGiveUpChase;
         }
-        else if ((timeLeftUntilGiveUpChase <= 0 && currentState == State.Player) || (currentState == State.Home && !hasDestination))
+        else if ((timeLeftUntilGiveUpChase <= 0 && currentState == State.Player) || (timeLeftUntilGiveUpDistraction <= 0 && currentState == State.Target) || 
+            (currentState == State.Home && !hasDestination))
         {
             currentState = State.Home;
             GameObject randomPointInHome = home[Random.Range(0, home.Count)];
@@ -106,7 +111,14 @@ public class EnemyAI : MonoBehaviour
         //move
         if (hasDestination)
         {
-            Move(currentDestination, detector.detectedPlayer == null);
+            bool shouldTurn = detector.detectedPlayer == null;
+            if (shouldTurn && currentState == State.Target)
+            {
+                shouldTurn = false;
+                Turn(target);
+            }
+            Move(currentDestination, shouldTurn);
+            
             if (centerOfMass.position == currentDestination)
             {
                 currentDestination = new Vector3();
@@ -126,6 +138,10 @@ public class EnemyAI : MonoBehaviour
                     currentDestination = new Vector3();
                     hasDestination = false;
                     currentNode = 0;
+                    if (currentState == State.Target)
+                    {
+                        timeLeftUntilGiveUpDistraction = timeUntilGiveUpChase;
+                    }
                 }
                 else
                 {
@@ -133,6 +149,13 @@ public class EnemyAI : MonoBehaviour
                     hasDestination = true;
                 }
             }
+        }
+
+
+        if (currentState == State.Target && currentPath == null && !hasDestination && timeLeftUntilGiveUpDistraction > 0)
+        {
+            currentDestination = target;
+            hasDestination = true;
         }
 
 
@@ -148,9 +171,12 @@ public class EnemyAI : MonoBehaviour
                 currentPath = pathFinding.A_Star(transform.position, target);
                 currentNode = 0;
                 currentState = State.Target;
+                currentDestination = currentPath[currentNode].getPosition();
+                hasDestination = true;
             }
             else
             {
+                timeLeftUntilGiveUpDistraction = timeUntilGiveUpChase;
                 currentPath = null;
                 currentNode = 0;
                 currentDestination = position;
@@ -161,9 +187,10 @@ public class EnemyAI : MonoBehaviour
 
     private bool canReachDestinationDirectly(Vector3 position)
     {
-        Vector3 direction = centerOfMass.position - position;
+        Vector3 direction = position - centerOfMass.position;
+        float distance = Vector3.Distance(centerOfMass.position, position);
         RaycastHit[] hits;
-        hits = Physics.RaycastAll(centerOfMass.position, direction, Mathf.Sqrt(Mathf.Pow(direction.x, 2) + Mathf.Pow(direction.y, 2) + Mathf.Pow(direction.z, 2)));
+        hits = Physics.RaycastAll(centerOfMass.position, direction, distance);
         bool canGoToObject = true;
         for (int j = 0; j < hits.Length; j++)
         {
