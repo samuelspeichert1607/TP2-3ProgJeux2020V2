@@ -80,11 +80,6 @@ public class Graph : MonoBehaviour
                         ObjectAIBehavior behavior = hits[j].collider.GetComponent<ObjectAIBehavior>();
                         if (!behavior.canActorsPassThrough)
                         {
-                            Debug.Log("ok");
-                            if (Nodes[i].gameObject.name == "GameObject(15)")
-                            {
-                                Debug.Log("ok");
-                            }
                             canGoToObject = false;
                             break;
                         }
@@ -208,10 +203,6 @@ public class Graph : MonoBehaviour
                 smallestYet = fScore[i];
                 positionOfSmallest = i;
             }
-        }
-        if (positionOfSmallest == -1)
-        {
-            Debug.Log("oh no");
         }
         return positionOfSmallest;
     }
