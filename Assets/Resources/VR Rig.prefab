@@ -476,7 +476,7 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
-  pause: {fileID: 0}
+  sceneManager: {fileID: 0}
 --- !u!114 &2379086240961838808
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -16,6 +16,7 @@ public class ContinuousMovement : MonoBehaviour
     private Vector2 inputAxis;
     private CharacterController character;
     private CharacterMovement movement;
+    private InputDevice device;
 
     // Start is called before the first frame update
     private void Start()
@@ -28,7 +29,7 @@ public class ContinuousMovement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        InputDevice device = InputDevices.GetDeviceAtXRNode(inputSource);
+        device = InputDevices.GetDeviceAtXRNode(inputSource);
         device.TryGetFeatureValue(CommonUsages.primary2DAxis, out inputAxis);
     }
 
@@ -38,7 +39,14 @@ public class ContinuousMovement : MonoBehaviour
         CapsuleFollowHeadset();
 
         Quaternion headYaw = Quaternion.Euler(0, rig.cameraGameObject.transform.eulerAngles.y, 0);
+
         Vector3 direction = headYaw * new Vector3(inputAxis.x, 0, inputAxis.y);
+
+        device.TryGetFeatureValue(CommonUsages.primary2DAxisClick, out bool primaryButtonClicked);
+        if (primaryButtonClicked)
+        {
+            direction = headYaw * new Vector3(inputAxis.x * 2, 0, inputAxis.y * 2);
+        }
 
         movement.Movement(direction);
     }

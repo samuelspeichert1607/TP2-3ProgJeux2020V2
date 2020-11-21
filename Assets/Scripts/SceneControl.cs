@@ -36,18 +36,9 @@ public class SceneControl : MonoBehaviour
                 player.GetComponent<ContinuousMovement>().enabled = false;
                 GameObject vrCamera = GameObject.Find("CameraOffset");
                 vrCamera.SetActive(false);
-                /*player.GetComponent<Snap>().enabled = false;
-                player.GetComponent<ContinuousMovement>().enabled = false;
-                player.GetComponent<ContinuousMovement>().enabled = false;*/
             }
         }
 
 
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
-        
     }
 }

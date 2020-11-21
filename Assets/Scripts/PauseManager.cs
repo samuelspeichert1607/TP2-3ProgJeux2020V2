@@ -1,24 +1,51 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class PauseManager : MonoBehaviour
 {
-    private GameObject[] vrRigs;
+    private GameObject[] pausableObjects;
 
     [SerializeField]
     private GameObject pauseCanvas;
 
+    [SerializeField]
+    private GameObject pauseCanvasVR;
+
+    [SerializeField]
+    private GameObject vrRigMenu;
+
+    private GameObject usedPauseCanvas;
+
+    private GameObject sceneManager;
+
+    [SerializeField]
+    private XRNode inputSource;
+
     public void Awake()
     {
-        vrRigs = GameObject.FindGameObjectsWithTag("Pausable");
+        sceneManager = GameObject.Find("SceneManager");
+
+        if (sceneManager.GetComponent<SceneControl>().IsVRActivated)
+        {
+            usedPauseCanvas = pauseCanvasVR;
+        }
+        else
+        {
+            usedPauseCanvas = pauseCanvas;
+        }
+
+        pausableObjects = GameObject.FindGameObjectsWithTag("Pausable");
     }
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        /*InputDevice device = InputDevices.GetDeviceAtXRNode(inputSource);
+        device.TryGetFeatureValue(CommonUsages.menuButton, out bool menuButtonClicked);*/
+        if (Input.GetKeyDown(KeyCode.P))// || menuButtonClicked)
         {
-            if (!pauseCanvas.activeSelf)
+            if (!usedPauseCanvas.activeSelf)
             {
                 PauseStuff();
             }
@@ -31,21 +58,25 @@ public class PauseManager : MonoBehaviour
 
     public void PauseStuff()
     {
-        foreach (GameObject vrRig in vrRigs)
+        foreach (GameObject pausableObject in pausableObjects)
         {
-            vrRig.SetActive(false);
+            pausableObject.SetActive(false);
         }
 
-        pauseCanvas.SetActive(true);
+        if(sceneManager.GetComponent<SceneControl>().IsVRActivated) { vrRigMenu.SetActive(true); }
+        
+        usedPauseCanvas.SetActive(true);
     }
 
     public void UnpauseStuff()
     {
-        pauseCanvas.SetActive(false);
+        if (sceneManager.GetComponent<SceneControl>().IsVRActivated) { vrRigMenu.SetActive(false); }
 
-        foreach (GameObject vrRig in vrRigs)
+        usedPauseCanvas.SetActive(false);
+        
+        foreach (GameObject pausableObject in pausableObjects)
         {
-            vrRig.SetActive(true);
+            pausableObject.SetActive(true);
         }
 
     }

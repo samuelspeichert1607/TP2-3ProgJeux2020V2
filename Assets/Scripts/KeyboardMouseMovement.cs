@@ -25,6 +25,14 @@ public class KeyboardMouseMovement : MonoBehaviour
     private void Update()
     {
         Vector3 direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        if (isCrouched)
+        {
+            direction = new Vector3(Input.GetAxis("Horizontal") / 2, 0, Input.GetAxis("Vertical") / 2);
+        }
+        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        {
+            direction = new Vector3(Input.GetAxis("Horizontal") * 2, 0, Input.GetAxis("Vertical") * 2);
+        }
         direction = transform.TransformDirection(direction);
         movement.Movement(direction);
 
