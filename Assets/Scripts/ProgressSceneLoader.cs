@@ -5,6 +5,16 @@ using System.Collections;
 
 public class ProgressSceneLoader : MonoBehaviour
 {
+    private static ProgressSceneLoader _instance;
+
+    public static ProgressSceneLoader Instance
+    {
+        get
+        {
+            return _instance;
+        }
+    }
+
     [SerializeField]
     private Text progressText;
 
@@ -16,8 +26,16 @@ public class ProgressSceneLoader : MonoBehaviour
     
     private void Awake()
     {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+
         canvas = GetComponentInChildren<Canvas>(true);
-        
         DontDestroyOnLoad(gameObject);
     }
 

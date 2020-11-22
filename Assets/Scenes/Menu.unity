@@ -1815,7 +1815,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 776221379}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.146325, y: 21.913616, z: -15.989038}
+  m_LocalPosition: {x: 7.146325, y: 845.41364, z: -15.989038}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 396643198}
@@ -3110,7 +3110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba588a43b0ddc164d9b7fc772e33e833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: TestRoom2
+  sceneToLoad: Lobby
 --- !u!224 &1290379176
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4990,7 +4990,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba588a43b0ddc164d9b7fc772e33e833, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: TestRoom2
+  sceneToLoad: Lobby
 --- !u!1 &1911884561
 GameObject:
   m_ObjectHideFlags: 0
@@ -5718,5 +5718,17 @@ PrefabInstance:
       propertyPath: m_InteractionManager
       value: 
       objectReference: {fileID: 1153158272}
+    - target: {fileID: 147451844973490201, guid: f67c5b3c3fc1a31468d59a25a1ccdcce, type: 3}
+      propertyPath: m_TargetDisplay
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 147451844973490201, guid: f67c5b3c3fc1a31468d59a25a1ccdcce, type: 3}
+      propertyPath: m_projectionMatrixMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 147451844973490201, guid: f67c5b3c3fc1a31468d59a25a1ccdcce, type: 3}
+      propertyPath: field of view
+      value: 31.356785
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f67c5b3c3fc1a31468d59a25a1ccdcce, type: 3}

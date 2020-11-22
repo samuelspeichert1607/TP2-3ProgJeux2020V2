@@ -20,6 +20,9 @@ public class PauseManager : MonoBehaviour
 
     private GameObject sceneManager;
 
+    public InputHelpers.Button inputHelpers = InputHelpers.Button.MenuButton;
+    public XRNode controller = XRNode.LeftHand;
+
     [SerializeField]
     private XRNode inputSource;
 
@@ -41,9 +44,8 @@ public class PauseManager : MonoBehaviour
 
     public void Update()
     {
-        /*InputDevice device = InputDevices.GetDeviceAtXRNode(inputSource);
-        device.TryGetFeatureValue(CommonUsages.menuButton, out bool menuButtonClicked);*/
-        if (Input.GetKeyDown(KeyCode.P))// || menuButtonClicked)
+        InputHelpers.IsPressed(InputDevices.GetDeviceAtXRNode(controller), inputHelpers, out bool isPressed);
+        if (Input.GetKeyDown(KeyCode.Return) || isPressed)
         {
             if (!usedPauseCanvas.activeSelf)
             {
@@ -63,16 +65,16 @@ public class PauseManager : MonoBehaviour
             pausableObject.SetActive(false);
         }
 
-        if(sceneManager.GetComponent<SceneControl>().IsVRActivated) { vrRigMenu.SetActive(true); }
+        //if(sceneManager.GetComponent<SceneControl>().IsVRActivated) { vrRigMenu.SetActive(true); }
         
         usedPauseCanvas.SetActive(true);
     }
 
     public void UnpauseStuff()
     {
-        if (sceneManager.GetComponent<SceneControl>().IsVRActivated) { vrRigMenu.SetActive(false); }
-
         usedPauseCanvas.SetActive(false);
+
+        //if (sceneManager.GetComponent<SceneControl>().IsVRActivated) { vrRigMenu.SetActive(false); }
         
         foreach (GameObject pausableObject in pausableObjects)
         {

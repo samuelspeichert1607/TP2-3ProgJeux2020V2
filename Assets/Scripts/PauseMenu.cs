@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.XR;
+using Photon.Pun;
 
-public class PauseMenu : MonoBehaviour
+public class PauseMenu : MonoBehaviourPunCallbacks
 {
     public void ReturnToMenuGame()
     {
         Debug.Log("ReturnToMenuGame");
-        SceneManager.LoadScene("Menu");
+        PhotonNetwork.Disconnect();
+        PhotonNetwork.LoadLevel(0);
     }
 }
