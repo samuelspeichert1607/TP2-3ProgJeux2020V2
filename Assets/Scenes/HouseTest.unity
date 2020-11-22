@@ -1307,6 +1307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e4020e245b49c442b6229d697a3747c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactableObjects: []
 --- !u!114 &893227949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1319,6 +1320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1bc63c0663902a48aa051a4fe8eddc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  triggers: []
 --- !u!1 &937500078
 GameObject:
   m_ObjectHideFlags: 0
@@ -3589,6 +3591,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1691685013951536977, guid: 3eae8642ccfa98a4ca407a848b1ae580, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 1784790526375909315, guid: 3eae8642ccfa98a4ca407a848b1ae580, type: 3}
       propertyPath: m_IsActive
       value: 0
