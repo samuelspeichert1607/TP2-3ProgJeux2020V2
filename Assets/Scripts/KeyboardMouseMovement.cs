@@ -31,20 +31,20 @@ public class KeyboardMouseMovement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        Vector3 direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        Vector3 direction = new Vector3(Input.GetAxis("Horizontal") * 4, 0, Input.GetAxis("Vertical") * 4);
         if (isCrouched)
         {
-            direction = new Vector3(Input.GetAxis("Horizontal") / 2, 0, Input.GetAxis("Vertical") / 2);
+            direction = new Vector3(direction.x / 2, 0, direction.z / 2);
         }
         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
         {
-            direction = new Vector3(Input.GetAxis("Horizontal") * 2, 0, Input.GetAxis("Vertical") * 2);
+            direction = new Vector3(direction.x * 2, 0, direction.z * 2);
         }
         direction = transform.TransformDirection(direction);
         movement.Movement(direction);
 
         float speed = Mathf.Sqrt(Mathf.Pow(direction.x, 2) + Mathf.Pow(direction.z, 2));
-        soundShpere.radius = speed * 2;
+        soundShpere.radius = speed;
 
         if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.RightControl))
         {

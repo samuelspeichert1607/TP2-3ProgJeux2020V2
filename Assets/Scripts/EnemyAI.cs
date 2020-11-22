@@ -96,7 +96,7 @@ public class EnemyAI : MonoBehaviour
             Turn(playerPosition);
             timeLeftUntilGiveUpChase = timeUntilGiveUpChase;
         }
-        else if ((timeLeftUntilGiveUpChase <= 0 && currentState == State.Player) || (timeLeftUntilGiveUpDistraction <= 0 && currentState == State.Target) || 
+        else if ((timeLeftUntilGiveUpChase <= 0 && currentState == State.Player) || (timeLeftUntilGiveUpDistraction <= 0 && currentState == State.Target) ||
             (currentState == State.Home && !hasDestination))
         {
             currentState = State.Home;
@@ -106,7 +106,7 @@ public class EnemyAI : MonoBehaviour
             currentDestination = currentPath[currentNode].getPosition();
             hasDestination = true;
         }
-        
+
 
         //move
         if (hasDestination)
@@ -118,7 +118,7 @@ public class EnemyAI : MonoBehaviour
                 Turn(target);
             }
             Move(currentDestination, shouldTurn);
-            
+
             if (centerOfMass.position == currentDestination)
             {
                 currentDestination = new Vector3();
@@ -151,12 +151,18 @@ public class EnemyAI : MonoBehaviour
             }
         }
 
+        //look around
+        if ((timeLeftUntilGiveUpChase > 0 && currentState == State.Player && detector.detectedPlayer == null && currentPath == null && !hasDestination) ||
+            (timeLeftUntilGiveUpDistraction > 0 && currentState == State.Target && currentPath == null && !hasDestination))
+        {
+            LookAround();
+        }
 
-        if (currentState == State.Target && currentPath == null && !hasDestination && timeLeftUntilGiveUpDistraction > 0)
+        /*if (currentState == State.Target && currentPath == null && !hasDestination && timeLeftUntilGiveUpDistraction > 0)
         {
             currentDestination = target;
             hasDestination = true;
-        }
+        }*/
 
 
     }
@@ -228,5 +234,10 @@ public class EnemyAI : MonoBehaviour
         //rotate us over time according to speed until we are in the required rotation
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, speed * Time.deltaTime / 2);
 
+    }
+
+    public void LookAround()
+    {
+        transform.RotateAround(centerOfMass.position, Vector3.up, speed * speed * speed * Time.deltaTime);
     }
 }

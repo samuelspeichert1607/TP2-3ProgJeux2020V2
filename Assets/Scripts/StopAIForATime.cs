@@ -43,9 +43,16 @@ public class StopAIForATime : MonoBehaviour
             if (timeLeft <= 0)
             {
                 interactedAI.speed = interactedAIOriginalSpeed;
+                interactedAI = null;
                 gameObject.SetActive(false);
             }
             timeLeft -= Time.deltaTime;
         }
+    }
+
+    public void OnEnable()
+    {
+        timeLeft = howLongToStopAIFor;
+        interactedAI = null;
     }
 }
