@@ -35,9 +35,13 @@ public class Graph : MonoBehaviour
         {
             Nodes = GetComponentsInChildren<Node>();
         }
+
         for (int i = 0; i < Nodes.Length; i++)
         {
             Nodes[i].initialize();
+        }
+        for (int i = 0; i < Nodes.Length; i++)
+        {
             Vector3 position = Nodes[i].getPosition();
             Debug.DrawLine(position - new Vector3(0.1f, 0.1f, 0.1f), position + new Vector3(0.1f, 0.1f, 0.1f), Color.blue);
 
