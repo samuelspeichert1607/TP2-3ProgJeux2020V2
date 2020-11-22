@@ -5,7 +5,7 @@ using UnityEngine;
 public class DetectCollisions : MonoBehaviour
 {
     private List<Collision> collisions;
-    private List<Collider> triggers;
+    public List<Collider> triggers;
     // Start is called before the first frame update
     void Start()
     {

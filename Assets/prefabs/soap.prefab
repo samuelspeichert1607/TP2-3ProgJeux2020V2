@@ -166,4 +166,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1254c158dc26454eadf6b0fd7bb9f67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  howLongToStopAIFor: 5
+  howLongToStopAIFor: 2

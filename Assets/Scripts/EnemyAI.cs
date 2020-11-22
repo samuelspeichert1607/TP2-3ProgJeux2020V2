@@ -27,7 +27,7 @@ public class EnemyAI : MonoBehaviour
 
     private Transform centerOfMass;
 
-    private State currentState;
+    public State currentState;
 
     private float timeLeftUntilGiveUpChase;
 
@@ -171,23 +171,13 @@ public class EnemyAI : MonoBehaviour
     {
         if (currentState != State.Player)
         {
+            currentState = State.Target;
             target = position;
-            if (!canReachDestinationDirectly(position))
-            {
-                currentPath = pathFinding.A_Star(transform.position, target);
-                currentNode = 0;
-                currentState = State.Target;
-                currentDestination = currentPath[currentNode].getPosition();
-                hasDestination = true;
-            }
-            else
-            {
-                timeLeftUntilGiveUpDistraction = timeUntilGiveUpChase;
-                currentPath = null;
-                currentNode = 0;
-                currentDestination = position;
-                hasDestination = true;
-            }
+            currentPath = pathFinding.A_Star(transform.position, position);
+            currentNode = 0;
+            currentDestination = currentPath[currentNode].getPosition();
+            hasDestination = true;
+            timeLeftUntilGiveUpDistraction = timeUntilGiveUpChase;
         }
     }
 
