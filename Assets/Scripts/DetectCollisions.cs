@@ -48,4 +48,10 @@ public class DetectCollisions : MonoBehaviour
     {
         return triggers;
     }
+
+    public void OnDisable()
+    {
+        collisions = new List<Collision>();
+        triggers = new List<Collider>();
+    }
 }
