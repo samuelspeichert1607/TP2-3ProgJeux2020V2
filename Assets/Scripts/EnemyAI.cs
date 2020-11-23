@@ -138,15 +138,16 @@ public class EnemyAI : MonoBehaviour
                     currentDestination = new Vector3();
                     hasDestination = false;
                     currentNode = 0;
-                    if (currentState == State.Target)
-                    {
-                        timeLeftUntilGiveUpDistraction = timeUntilGiveUpChase;
-                    }
                 }
                 else
                 {
                     currentDestination = currentPath[currentNode].getPosition();
                     hasDestination = true;
+                }
+
+                if (currentState == State.Target)
+                {
+                    timeLeftUntilGiveUpDistraction = timeUntilGiveUpChase;
                 }
             }
         }
