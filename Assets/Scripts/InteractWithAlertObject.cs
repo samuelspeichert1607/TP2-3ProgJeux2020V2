@@ -6,7 +6,9 @@ public class InteractWithAlertObject : MonoBehaviour
 {
     private DetectCollisions collisions;
 
-    public List<AlertHouseOwner> interactableObjects;
+    public AlertHouseOwner doorBell;
+
+    public PlacePoopBag doorMat;
 
     // Start is called before the first frame update
     void Start()
@@ -18,30 +20,37 @@ public class InteractWithAlertObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        interactableObjects.Clear();
         List<Collider> colliders = collisions.getTriggers();
         for (int i = 0; i < colliders.Count; i++)
         {
             if (colliders[i].GetComponent<AlertHouseOwner>() != null)
             {
-                interactableObjects.Add(colliders[i].GetComponent<AlertHouseOwner>());
+                AlertHouseOwner test = colliders[i].GetComponent<AlertHouseOwner>();
+                if (test.type == AlertHouseOwner.AlertType.DoorBell)
+                {
+                    doorBell = test;
+                }
+            }
+            if (colliders[i].GetComponent<PlacePoopBag>() != null)
+            {
+                doorMat = colliders[i].GetComponent<PlacePoopBag>();
             }
         }
 
-        if (interactableObjects.Count >= 1)
+        if (doorBell != null)
         {
             //code UI promt here
-            if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                interactableObjects[0].AlertOwner();
+                doorBell.AlertOwner();
             }
         }
-        if (interactableObjects.Count >= 2)
+        if (doorMat != null)
         {
             //code UI promt here
-            if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                interactableObjects[1].AlertOwner();
+                doorMat.placeBag();
             }
         }
     }

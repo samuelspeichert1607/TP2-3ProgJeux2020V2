@@ -4,9 +4,18 @@ using UnityEngine;
 
 public class AlertHouseOwner : MonoBehaviour
 {
+
+    public enum AlertType
+    {
+        DoorBell,
+        Window
+    }
+
     private House houseInfo;
 
     public GameObject OwnerDestination;
+
+    public AlertType type;
 
     // Start is called before the first frame update
     void Start()
