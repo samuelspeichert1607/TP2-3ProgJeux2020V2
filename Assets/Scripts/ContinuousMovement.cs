@@ -18,12 +18,15 @@ public class ContinuousMovement : MonoBehaviour
     private CharacterMovement movement;
     private InputDevice device;
 
+    private SphereCollider soundShpere;
+
     // Start is called before the first frame update
     private void Start()
     {
         character = GetComponent<CharacterController>();
         movement = GetComponent<CharacterMovement>();
         rig = GetComponent<XRRig>();
+        soundShpere = GetComponentInChildren<SphereCollider>();
     }
 
     // Update is called once per frame
@@ -40,15 +43,18 @@ public class ContinuousMovement : MonoBehaviour
 
         Quaternion headYaw = Quaternion.Euler(0, rig.cameraGameObject.transform.eulerAngles.y, 0);
 
-        Vector3 direction = headYaw * new Vector3(inputAxis.x, 0, inputAxis.y);
+        Vector3 direction = headYaw * new Vector3(inputAxis.x * 4, 0, inputAxis.y * 4);
 
         device.TryGetFeatureValue(CommonUsages.primary2DAxisClick, out bool primaryButtonClicked);
         if (primaryButtonClicked)
         {
-            direction = headYaw * new Vector3(inputAxis.x * 2, 0, inputAxis.y * 2);
+            direction = headYaw * new Vector3(inputAxis.x * 8, 0, inputAxis.y * 8);
         }
 
         movement.Movement(direction);
+
+        float speed = Mathf.Sqrt(Mathf.Pow(direction.x, 2) + Mathf.Pow(direction.z, 2));
+        soundShpere.radius = speed * 2;
     }
 
     private void CapsuleFollowHeadset()

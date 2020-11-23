@@ -17,8 +17,6 @@ public class CharacterMovement : MonoBehaviour
 
     private CharacterController character;
 
-    public GameObject sceneManager;
-
     // Start is called before the first frame update
     private void Start()
     {
@@ -55,10 +53,5 @@ public class CharacterMovement : MonoBehaviour
         float rayLength = character.center.y + 0.01f;
         bool hasHit = Physics.SphereCast(rayStart, character.radius, Vector3.down, out RaycastHit hitInfo, rayLength, groundLayer);
         return hasHit;
-    }
-
-    public void Pause()
-    {
-        sceneManager.GetComponent<PauseManager>().PauseStuff();
     }
 }

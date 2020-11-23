@@ -13,9 +13,6 @@ public class PauseManager : MonoBehaviour
     [SerializeField]
     private GameObject pauseCanvasVR;
 
-    [SerializeField]
-    private GameObject vrRigMenu;
-
     private GameObject usedPauseCanvas;
 
     private GameObject sceneManager;
