@@ -68,33 +68,36 @@ public class EnemyAI : MonoBehaviour
         {
             Transform playerCenter = detector.detectedPlayer.GetComponent<Transform>().Find("CenterOfMass");
             Vector3 playerPosition = playerCenter.position;
-            if (currentState != State.Player || !hasDestination)
+            if (canReachLocation(playerPosition))
             {
-                if (!canReachDestinationDirectly(playerPosition))
+                if (currentState != State.Player || !hasDestination)
                 {
-                    currentPath = pathFinding.A_Star(transform.position, playerPosition);
-                    currentNode = 0;
-                    currentDestination = currentPath[currentNode].getPosition();
-                    hasDestination = true;
+                    if (!canReachDestinationDirectly(playerPosition))
+                    {
+                        currentPath = pathFinding.A_Star(transform.position, playerPosition);
+                        currentNode = 0;
+                        currentDestination = currentPath[currentNode].getPosition();
+                        hasDestination = true;
+                    }
+                    else
+                    {
+                        currentPath = null;
+                        currentNode = 0;
+                        currentDestination = playerPosition;
+                        hasDestination = true;
+                    }
+                    currentState = State.Player;
                 }
-                else
+                if (canReachDestinationDirectly(playerPosition))
                 {
                     currentPath = null;
                     currentNode = 0;
                     currentDestination = playerPosition;
                     hasDestination = true;
                 }
-                currentState = State.Player;
+                Turn(playerPosition);
+                timeLeftUntilGiveUpChase = timeUntilGiveUpChase;
             }
-            if (canReachDestinationDirectly(playerPosition))
-            {
-                currentPath = null;
-                currentNode = 0;
-                currentDestination = playerPosition;
-                hasDestination = true;
-            }
-            Turn(playerPosition);
-            timeLeftUntilGiveUpChase = timeUntilGiveUpChase;
         }
         else if ((timeLeftUntilGiveUpChase <= 0 && currentState == State.Player) || (timeLeftUntilGiveUpDistraction <= 0 && currentState == State.Target) ||
             (currentState == State.Home && !hasDestination))
@@ -204,7 +207,7 @@ public class EnemyAI : MonoBehaviour
         return canGoToObject;
     }
 
-    public void Move(Vector3 destination, bool turn)
+    private void Move(Vector3 destination, bool turn)
     {
         Vector3 currentPosition = centerOfMass.position;
 
@@ -215,7 +218,7 @@ public class EnemyAI : MonoBehaviour
         transform.position = Vector3.MoveTowards(currentPosition, destination, speed * Time.deltaTime);
     }
 
-    public void Turn(Vector3 destination)
+    private void Turn(Vector3 destination)
     {
         Vector3 direction = (destination - transform.position).normalized;
 
@@ -227,8 +230,13 @@ public class EnemyAI : MonoBehaviour
 
     }
 
-    public void LookAround()
+    private void LookAround()
     {
         transform.RotateAround(centerOfMass.position, Vector3.up, speed * speed * speed * Time.deltaTime);
+    }
+
+    private bool canReachLocation(Vector3 position)
+    {
+        return pathFinding.getColsestNodeToPoint(position) != null;
     }
 }
