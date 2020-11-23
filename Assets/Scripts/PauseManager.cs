@@ -64,8 +64,6 @@ public class PauseManager : MonoBehaviour
         {
             pausableObject.SetActive(false);
         }
-
-        //if(sceneManager.GetComponent<SceneControl>().IsVRActivated) { vrRigMenu.SetActive(true); }
         
         usedPauseCanvas.SetActive(true);
     }
@@ -73,8 +71,6 @@ public class PauseManager : MonoBehaviour
     public void UnpauseStuff()
     {
         usedPauseCanvas.SetActive(false);
-
-        //if (sceneManager.GetComponent<SceneControl>().IsVRActivated) { vrRigMenu.SetActive(false); }
         
         foreach (GameObject pausableObject in pausableObjects)
         {
