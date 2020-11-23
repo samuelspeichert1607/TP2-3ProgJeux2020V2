@@ -19,6 +19,8 @@ public class ContinuousMovement : MonoBehaviour
 
     private SphereCollider soundShpere;
 
+    private SoundInfo soundShpereInfo;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -26,6 +28,7 @@ public class ContinuousMovement : MonoBehaviour
         movement = GetComponent<CharacterMovement>();
         rig = GetComponent<XRRig>();
         soundShpere = GetComponentInChildren<SphereCollider>();
+        soundShpereInfo = soundShpere.GetComponent<SoundInfo>();
     }
 
     // Update is called once per frame
@@ -47,6 +50,7 @@ public class ContinuousMovement : MonoBehaviour
 
         float speed = Mathf.Sqrt(Mathf.Pow(direction.x, 2) + Mathf.Pow(direction.z, 2));
         soundShpere.radius = speed * 2;
+        soundShpereInfo.soundRadious = speed * 2;
     }
 
     private void CapsuleFollowHeadset()

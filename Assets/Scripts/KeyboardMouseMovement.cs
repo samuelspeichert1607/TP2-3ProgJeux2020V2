@@ -16,6 +16,8 @@ public class KeyboardMouseMovement : MonoBehaviour
 
     private SphereCollider soundShpere;
 
+    private SoundInfo soundShpereInfo;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -26,6 +28,7 @@ public class KeyboardMouseMovement : MonoBehaviour
         trans = GetComponent<Transform>().Find("Head");
         head = trans.gameObject;
         soundShpere = GetComponentInChildren<SphereCollider>();
+        soundShpereInfo = soundShpere.GetComponent<SoundInfo>();
     }
 
     // Update is called once per frame
@@ -45,6 +48,7 @@ public class KeyboardMouseMovement : MonoBehaviour
 
         float speed = Mathf.Sqrt(Mathf.Pow(direction.x, 2) + Mathf.Pow(direction.z, 2));
         soundShpere.radius = speed;
+        soundShpereInfo.soundRadious = speed;
 
         if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.RightControl))
         {

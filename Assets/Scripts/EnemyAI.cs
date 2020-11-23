@@ -162,13 +162,6 @@ public class EnemyAI : MonoBehaviour
             LookAround();
         }
 
-        /*if (currentState == State.Target && currentPath == null && !hasDestination && timeLeftUntilGiveUpDistraction > 0)
-        {
-            currentDestination = target;
-            hasDestination = true;
-        }*/
-
-
     }
 
     public void getAttention(Vector3 position)
