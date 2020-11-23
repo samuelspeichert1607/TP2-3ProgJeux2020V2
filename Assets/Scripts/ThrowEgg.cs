@@ -27,8 +27,7 @@ public class ThrowEgg : MonoBehaviour
 
             GameObject newEgg = Instantiate(eggPrefab, startLocation.transform.position, rotation);
             Egg newEggValues = newEgg.GetComponent<Egg>();
-            newEggValues.speed = throwForce;
-            newEggValues.elapsedTime = 0;
+            newEggValues.initialise(throwForce);
         }
     }
 }

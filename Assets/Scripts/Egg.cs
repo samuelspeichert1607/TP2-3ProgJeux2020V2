@@ -16,18 +16,17 @@ public class Egg : MonoBehaviour
 
     private DetectCollisions collisions;
 
-    public bool isBroken;
+    private Vector3 originalLocation;
 
     // Start is called before the first frame update
     void Start()
     {
         collisions = GetComponent<DetectCollisions>();
-        isBroken = false;
         isGoingDown = false;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         elapsedTime += Time.deltaTime;
 
@@ -54,8 +53,23 @@ public class Egg : MonoBehaviour
                 ObjectAIBehavior objectInfo = colliders[i].GetComponent<ObjectAIBehavior>();
                 if (!objectInfo.canActorsPassThrough)
                 {
-                    isBroken = true;
-                    Instantiate(brokenEggPrefab, transform.position, colliders[i].transform.rotation);
+                    Vector3 brokenEggPosition = transform.position;
+
+                    Vector3 direction = brokenEggPosition - originalLocation;
+                    float distance = Vector3.Distance(originalLocation, brokenEggPosition);
+                    RaycastHit[] hits;
+                    hits = Physics.RaycastAll(originalLocation, direction, distance);
+                    for (int j = 0; j < hits.Length; j++)
+                    {
+                        if (hits[j].collider == colliders[i])
+                        {
+                            brokenEggPosition = hits[j].point;
+                            break;
+                        }
+                    }
+
+
+                    Instantiate(brokenEggPrefab, brokenEggPosition, colliders[i].transform.rotation);
                     gameObject.SetActive(false);
                     break;
                 }
@@ -70,5 +84,8 @@ public class Egg : MonoBehaviour
     {
         speed = _speed;
         elapsedTime = 0;
+        originalLocation = transform.position;
     }
+
+
 }
