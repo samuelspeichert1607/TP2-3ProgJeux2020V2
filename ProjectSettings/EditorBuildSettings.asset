@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TestRoom4.unity
     guid: 83e411aed519aa84685e0284fbfbc582
+  - enabled: 1
+    path: Assets/Scenes/HouseTest2.unity
+    guid: bcdb54507ca90ab43a78ee98c0db0bc1
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 9f6e97481f7c730498d3623f0a953c95, type: 2}
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: b19ddc1bbf80d9d44bd0af962122f892, type: 2}
