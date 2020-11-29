@@ -27,7 +27,7 @@ public class KeyboardMouseMovement : MonoBehaviour
         cam = trans.gameObject;
         trans = GetComponent<Transform>().Find("Head");
         head = trans.gameObject;
-        soundShpere = GetComponentInChildren<SphereCollider>();
+        soundShpere = GameObject.Find("SoundMade").GetComponent<SphereCollider>();
         soundShpereInfo = soundShpere.GetComponent<SoundInfo>();
     }
 

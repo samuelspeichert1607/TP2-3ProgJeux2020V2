@@ -23,9 +23,4 @@ public class GlobalControl : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        
-    }
-
 }

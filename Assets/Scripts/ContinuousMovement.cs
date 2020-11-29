@@ -28,7 +28,7 @@ public class ContinuousMovement : MonoBehaviour
         character = GetComponent<CharacterController>();
         movement = GetComponent<CharacterMovement>();
         rig = GetComponent<XRRig>();
-        soundShpere = GetComponentInChildren<SphereCollider>();
+        soundShpere = GameObject.Find("SoundMade").GetComponent<SphereCollider>();
         soundShpereInfo = soundShpere.GetComponent<SoundInfo>();
     }
     
