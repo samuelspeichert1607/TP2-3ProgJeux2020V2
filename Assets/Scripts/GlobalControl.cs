@@ -6,8 +6,10 @@ public class GlobalControl : MonoBehaviour
 {
     public static GlobalControl Instance;
     
-    private bool _isVR;
-    
+    public bool IsVRActivated { get; set; }
+
+    public DifficultyMode difficultyMode;
+
     private void Awake()
     {
         if (Instance == null)
@@ -26,9 +28,4 @@ public class GlobalControl : MonoBehaviour
         
     }
 
-    public bool IsVRActivated
-    {
-        get { return _isVR; }
-        set { _isVR = value; }
-    }
 }

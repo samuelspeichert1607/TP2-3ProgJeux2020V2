@@ -7,9 +7,16 @@ public class SceneControl : MonoBehaviour
 {
     private GlobalControl globalControl;
     
-    public bool IsVRActivated;
+    public bool IsVRActivated { get; set; }
 
-    // Start is called before the first frame update
+    private DifficultyMode difficultyMode;
+
+    [SerializeField]
+    private GameObject UICanvas;
+
+    [SerializeField]
+    private GameObject UICanvasVR;
+    
     private void Awake()
     {
         GameObject globalGameController = GameObject.Find("GlobalGameController");
@@ -27,26 +34,22 @@ public class SceneControl : MonoBehaviour
             if (IsVRActivated)
             {
                 player.GetComponent<KeyboardMouseMovement>().enabled = false;
+                player.GetComponent<CharacterController>().radius = 0.0f;
+                player.GetComponent<CameraControl>().enabled = false;
                 GameObject mainCamera = GameObject.Find("StandardCamera");
                 mainCamera.SetActive(false);
+                UICanvasVR.SetActive(true);
             }
             else
             {
                 player.GetComponent<ContinuousMovement>().enabled = false;
+                player.GetComponent<CharacterController>().radius = 0.5f;
                 GameObject vrCamera = GameObject.Find("CameraOffset");
                 vrCamera.SetActive(false);
-                /*player.GetComponent<Snap>().enabled = false;
-                player.GetComponent<ContinuousMovement>().enabled = false;
-                player.GetComponent<ContinuousMovement>().enabled = false;*/
+                UICanvas.SetActive(true);
             }
         }
 
 
-    }
-
-    // Update is called once per frame
-    private void Update()
-    {
-        
     }
 }

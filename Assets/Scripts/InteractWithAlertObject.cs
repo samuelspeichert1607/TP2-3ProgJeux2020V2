@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class InteractWithAlertObject : MonoBehaviour
 {
@@ -11,14 +12,13 @@ public class InteractWithAlertObject : MonoBehaviour
     public PlacePoopBag doorMat;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         collisions = GetComponent<DetectCollisions>();
-        List<AlertHouseOwner> interactableObjects = new List<AlertHouseOwner>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         List<Collider> colliders = collisions.getTriggers();
         for (int i = 0; i < colliders.Count; i++)
@@ -53,5 +53,7 @@ public class InteractWithAlertObject : MonoBehaviour
                 doorMat.placeBag();
             }
         }
+        doorBell = null;
+        doorMat = null;
     }
 }

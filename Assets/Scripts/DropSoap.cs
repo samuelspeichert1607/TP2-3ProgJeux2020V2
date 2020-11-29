@@ -1,23 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class DropSoap : MonoBehaviour
 {
     public GameObject soapPrefab;
 
     public GameObject soapDropLocation;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public InputHelpers.Button inputHelpers = InputHelpers.Button.PrimaryButton;
+    public XRNode controller = XRNode.RightHand;
+    
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        InputHelpers.IsPressed(InputDevices.GetDeviceAtXRNode(controller), inputHelpers, out bool isPressed);
+        if (Input.GetKeyDown(KeyCode.Q) || isPressed)
         {
             Instantiate(soapPrefab, soapDropLocation.transform.position, Quaternion.identity);
         }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerDetection : MonoBehaviour
 {
+    private GameObject sceneManager;
+
     private DetectCollisions visionCollider;
 
     private DetectCollisions hearingCollider;

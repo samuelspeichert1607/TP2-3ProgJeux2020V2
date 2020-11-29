@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class ThrowEgg : MonoBehaviour
 {
@@ -12,16 +13,13 @@ public class ThrowEgg : MonoBehaviour
 
     public float throwForce;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public InputHelpers.Button inputHelpers = InputHelpers.Button.Grip;
+    public XRNode controller = XRNode.RightHand;
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        InputHelpers.IsPressed(InputDevices.GetDeviceAtXRNode(controller), inputHelpers, out bool isPressed);
+        if (Input.GetKeyDown(KeyCode.F) || isPressed)
         {
             Quaternion rotation = Quaternion.LookRotation(directionAncor.transform.position - startLocation.transform.position);
 
