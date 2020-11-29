@@ -172,6 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OwnerDestination: {fileID: 3434068982108754283}
+  type: 0
 --- !u!1 &5034566772230749752
 GameObject:
   m_ObjectHideFlags: 0

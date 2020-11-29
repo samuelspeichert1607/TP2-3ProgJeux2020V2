@@ -1512,12 +1512,12 @@ MonoBehaviour:
   defaultRooms:
   - Name: Test
     sceneIndex: 5
-    maxPlayer: 2
+    maxPlayer: 4
   - Name: Fun Room
-    sceneIndex: 3
-    maxPlayer: 10
+    sceneIndex: 5
+    maxPlayer: 4
   - Name: Competitive Room
-    sceneIndex: 4
+    sceneIndex: 5
     maxPlayer: 4
   roomUI: {fileID: 1645192122}
   roomUIVR: {fileID: 746870290}

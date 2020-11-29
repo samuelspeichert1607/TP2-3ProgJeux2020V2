@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerDetection : MonoBehaviour
 {
+    private GameObject sceneManager;
+
     private DetectCollisions visionCollider;
 
     private DetectCollisions hearingCollider;
@@ -65,10 +67,10 @@ public class PlayerDetection : MonoBehaviour
         {
             if (hearingColliders[i] is SphereCollider)
             {
-                SphereCollider collider = (SphereCollider)hearingColliders[i];
-                if (collider.radius != 0)
+                if (hearingColliders[i].GetComponentInParent<CharacterController>() != null)
                 {
-                    if (hearingColliders[i].GetComponentInParent<CharacterController>() != null)
+                    SoundInfo info = hearingColliders[i].GetComponent<SoundInfo>();
+                    if (info.isMakingSound)
                     {
                         GameObject player = hearingColliders[i].GetComponentInParent<CharacterController>().gameObject;
                         Transform sound = player.GetComponent<Transform>().Find("SoundMade");

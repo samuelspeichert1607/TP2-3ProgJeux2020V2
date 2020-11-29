@@ -11,12 +11,11 @@ public class DropSoap : MonoBehaviour
 
     public InputHelpers.Button inputHelpers = InputHelpers.Button.PrimaryButton;
     public XRNode controller = XRNode.RightHand;
-
-    // Update is called once per frame
-    void Update()
+    
+    private void Update()
     {
         InputHelpers.IsPressed(InputDevices.GetDeviceAtXRNode(controller), inputHelpers, out bool isPressed);
-        if (Input.GetKeyDown(KeyCode.E) || isPressed)
+        if (Input.GetKeyDown(KeyCode.Q) || isPressed)
         {
             Instantiate(soapPrefab, soapDropLocation.transform.position, Quaternion.identity);
         }

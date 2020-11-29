@@ -7,9 +7,16 @@ public class SceneControl : MonoBehaviour
 {
     private GlobalControl globalControl;
     
-    public bool IsVRActivated;
+    public bool IsVRActivated { get; set; }
 
-    // Start is called before the first frame update
+    private DifficultyMode difficultyMode;
+
+    [SerializeField]
+    private GameObject UICanvas;
+
+    [SerializeField]
+    private GameObject UICanvasVR;
+    
     private void Awake()
     {
         GameObject globalGameController = GameObject.Find("GlobalGameController");
@@ -31,7 +38,7 @@ public class SceneControl : MonoBehaviour
                 player.GetComponent<CameraControl>().enabled = false;
                 GameObject mainCamera = GameObject.Find("StandardCamera");
                 mainCamera.SetActive(false);
-                //Destroy(mainCamera);
+                UICanvasVR.SetActive(true);
             }
             else
             {
@@ -39,7 +46,7 @@ public class SceneControl : MonoBehaviour
                 player.GetComponent<CharacterController>().radius = 0.5f;
                 GameObject vrCamera = GameObject.Find("CameraOffset");
                 vrCamera.SetActive(false);
-                //Destroy(vrCamera);
+                UICanvas.SetActive(true);
             }
         }
 

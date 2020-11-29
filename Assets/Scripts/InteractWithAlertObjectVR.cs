@@ -7,49 +7,59 @@ public class InteractWithAlertObjectVR : MonoBehaviour
 {
     private DetectCollisions collisions;
 
-    public List<AlertHouseOwner> interactableObjects;
+    public AlertHouseOwner doorBell;
+
+    public PlacePoopBag doorMat;
 
     public InputHelpers.Button inputHelpers = InputHelpers.Button.Trigger;
-    public XRNode controller1 = XRNode.LeftHand;
-    public XRNode controller2 = XRNode.RightHand;
+    public XRNode rightHand = XRNode.RightHand;
+    public XRNode leftHand = XRNode.LeftHand;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         collisions = GetComponent<DetectCollisions>();
-        List<AlertHouseOwner> interactableObjects = new List<AlertHouseOwner>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        interactableObjects.Clear();
         List<Collider> colliders = collisions.getTriggers();
         for (int i = 0; i < colliders.Count; i++)
         {
             if (colliders[i].GetComponent<AlertHouseOwner>() != null)
             {
-                interactableObjects.Add(colliders[i].GetComponent<AlertHouseOwner>());
+                AlertHouseOwner test = colliders[i].GetComponent<AlertHouseOwner>();
+                if (test.type == AlertHouseOwner.AlertType.DoorBell)
+                {
+                    doorBell = test;
+                }
+            }
+            if (colliders[i].GetComponent<PlacePoopBag>() != null)
+            {
+                doorMat = colliders[i].GetComponent<PlacePoopBag>();
             }
         }
 
-        if (interactableObjects.Count >= 1)
+        if (doorBell != null)
         {
             //code UI promt here
-            InputHelpers.IsPressed(InputDevices.GetDeviceAtXRNode(controller1), inputHelpers, out bool isPressed);
+            InputHelpers.IsPressed(InputDevices.GetDeviceAtXRNode(rightHand), inputHelpers, out bool isPressed);
             if (isPressed)
             {
-                interactableObjects[0].AlertOwner();
+                doorBell.AlertOwner();
             }
         }
-        if (interactableObjects.Count >= 2)
+        if (doorMat != null)
         {
             //code UI promt here
-            InputHelpers.IsPressed(InputDevices.GetDeviceAtXRNode(controller2), inputHelpers, out bool isPressed);
+            InputHelpers.IsPressed(InputDevices.GetDeviceAtXRNode(leftHand), inputHelpers, out bool isPressed);
             if (isPressed)
             {
-                interactableObjects[1].AlertOwner();
+                doorMat.placeBag();
             }
         }
+        doorBell = null;
+        doorMat = null;
     }
 }

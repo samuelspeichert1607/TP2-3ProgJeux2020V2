@@ -8,6 +8,8 @@ public class GlobalControl : MonoBehaviour
     
     public bool IsVRActivated { get; set; }
 
+    public DifficultyMode difficultyMode;
+
     private void Awake()
     {
         if (Instance == null)

@@ -2,7 +2,8 @@
 using UnityEngine.XR;
 using Photon.Pun;
 
-public class PauseMenu : MonoBehaviourPunCallbacks
+public class PauseMenu : MonoBehaviourPunCallbacks
+
 {
     public void ReturnToMenuGame()
     {
