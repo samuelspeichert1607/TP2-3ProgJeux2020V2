@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 4962133704648626553}
   - component: {fileID: 139635127767534887}
   - component: {fileID: 7807521460812699695}
+  - component: {fileID: 2004727246140148271}
   m_Layer: 0
   m_Name: brokenEgg
   m_TagString: Untagged
@@ -264,3 +265,15 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
+--- !u!114 &2004727246140148271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7488913688615969059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 900001d2af079be4c929476893f766a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

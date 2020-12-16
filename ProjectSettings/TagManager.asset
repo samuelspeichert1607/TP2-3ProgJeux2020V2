@@ -20,7 +20,7 @@ TagManager:
   - Body
   - Grabable
   - BodyNetwork
-  - 
+  - Particle
   - 
   - 
   - 
@@ -40,6 +40,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Particle
+    uniqueID: 2022544785
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

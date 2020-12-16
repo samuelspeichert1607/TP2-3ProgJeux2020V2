@@ -143,9 +143,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brokenEggPrefab: {fileID: 7488913688615969059, guid: be4d6daad6e702343b574cf8aa6b48d6, type: 3}
-  speed: 5
+  speed: 7
   elapsedTime: 0
-  timeUntillStartFalling: 5
+  timeUntillStartFalling: 2
 --- !u!114 &3832167441696677321
 MonoBehaviour:
   m_ObjectHideFlags: 0
