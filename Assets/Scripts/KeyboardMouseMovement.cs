@@ -18,6 +18,8 @@ public class KeyboardMouseMovement : MonoBehaviour
 
     private SoundInfo soundShpereInfo;
 
+    public float speed;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -46,7 +48,7 @@ public class KeyboardMouseMovement : MonoBehaviour
         direction = transform.TransformDirection(direction);
         movement.Movement(direction);
 
-        float speed = Mathf.Sqrt(Mathf.Pow(direction.x, 2) + Mathf.Pow(direction.z, 2));
+        speed = Mathf.Sqrt(Mathf.Pow(direction.x, 2) + Mathf.Pow(direction.z, 2));
         soundShpere.radius = speed;
         soundShpereInfo.soundRadious = speed;
 

@@ -6,7 +6,7 @@ public class BackgroundMusicController : MonoBehaviour
 {
     public float transitionDuration;
 
-    public float timeLeftInTransition;
+    private float timeLeftInTransition;
 
     private PlayerStatus status;
 
@@ -15,6 +15,8 @@ public class BackgroundMusicController : MonoBehaviour
     private AudioSource chaseMusic;
 
     private bool isChaseMusicPlaying;
+
+    private Volume volume;
 
     // Start is called before the first frame update
     void Start()
@@ -29,29 +31,31 @@ public class BackgroundMusicController : MonoBehaviour
 
         timeLeftInTransition = transitionDuration;
         isChaseMusicPlaying = false;
+        volume = GetComponent<Volume>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        float maxVolume = volume.volume;
         if (timeLeftInTransition < transitionDuration)
         {
             timeLeftInTransition += Time.deltaTime;
-            float volume = 1 * timeLeftInTransition / transitionDuration;
-            if (volume > 1)
+            float volume = maxVolume * timeLeftInTransition / transitionDuration;
+            if (volume > maxVolume)
             {
-                volume = 1;
+                volume = maxVolume;
             }
 
             if (isChaseMusicPlaying)
             {
-                normalMusic.volume = 1 - volume;
+                normalMusic.volume = maxVolume - volume;
                 chaseMusic.volume = volume;
             }
             else
             {
                 normalMusic.volume = volume;
-                chaseMusic.volume = 1 - volume;
+                chaseMusic.volume = maxVolume - volume;
             }
         }
         else
@@ -59,11 +63,11 @@ public class BackgroundMusicController : MonoBehaviour
             if (isChaseMusicPlaying)
             {
                 normalMusic.volume = 0;
-                chaseMusic.volume = 1;
+                chaseMusic.volume = maxVolume;
             }
             else
             {
-                normalMusic.volume = 1;
+                normalMusic.volume = maxVolume;
                 chaseMusic.volume = 0;
             }
         }

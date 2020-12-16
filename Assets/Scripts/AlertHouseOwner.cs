@@ -19,6 +19,8 @@ public class AlertHouseOwner : MonoBehaviour
 
     public AlertType type;
 
+    private AudioSource ring;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -34,6 +36,7 @@ public class AlertHouseOwner : MonoBehaviour
         }
         
         houseInfo = transform.root.GetComponent<House>();
+        ring = GetComponent<AudioSource>();
     }
 
     public void AlertOwner()
@@ -45,6 +48,7 @@ public class AlertHouseOwner : MonoBehaviour
         else if (type == AlertType.DoorBell)
         {
             updateUI.DingDongDitchesDone += 1;
+            ring.Play();
         }
 
         houseInfo.getOwner().getAttention(OwnerDestination.transform.position);

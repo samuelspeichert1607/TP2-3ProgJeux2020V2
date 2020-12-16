@@ -14,12 +14,16 @@ public class StopAIForATime : MonoBehaviour
 
     private DetectCollisions collisions;
 
+    private AudioSource stepOnSound;
+
     // Start is called before the first frame update
     void Start()
     {
         timeLeft = howLongToStopAIFor;
         collisions = GetComponentInChildren<DetectCollisions>();
         interactedAI = null;
+
+        stepOnSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -45,6 +49,11 @@ public class StopAIForATime : MonoBehaviour
                 interactedAI.speed = interactedAIOriginalSpeed;
                 interactedAI = null;
                 gameObject.SetActive(false);
+            }
+
+            if(!stepOnSound.isPlaying)
+            {
+                stepOnSound.Play();
             }
             timeLeft -= Time.deltaTime;
         }
