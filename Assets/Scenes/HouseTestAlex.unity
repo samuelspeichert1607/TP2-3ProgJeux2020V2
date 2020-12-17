@@ -9739,7 +9739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundType: 0
-  volume: 0.255
+  volume: 1
   editAudioVolume: 0
 --- !u!114 &1144404480
 MonoBehaviour:
