@@ -22,6 +22,8 @@ public class ContinuousMovement : MonoBehaviour
 
     private SoundInfo soundShpereInfo;
 
+    public float speed;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -54,7 +56,7 @@ public class ContinuousMovement : MonoBehaviour
 
         movement.Movement(direction);
 
-        float speed = Mathf.Sqrt(Mathf.Pow(direction.x, 2) + Mathf.Pow(direction.z, 2));
+        speed = Mathf.Sqrt(Mathf.Pow(direction.x, 2) + Mathf.Pow(direction.z, 2));
         soundShpere.radius = speed * 2;
         soundShpereInfo.soundRadious = speed * 2;
     }

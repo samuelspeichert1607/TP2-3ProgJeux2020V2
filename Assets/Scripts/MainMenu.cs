@@ -22,6 +22,8 @@ public class MainMenu : MonoBehaviour
     {
         gameObject.SetActive(false);
         FindObjectOfType<ProgressSceneLoader>().LoadScene(sceneToLoad);
+        gameObject.SetActive(false);
+        FindObjectOfType<ProgressSceneLoader>().LoadScene(sceneToLoad);
     }
 
     public void OptionsGame()

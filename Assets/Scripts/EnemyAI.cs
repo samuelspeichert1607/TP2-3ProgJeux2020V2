@@ -37,6 +37,8 @@ public class EnemyAI : MonoBehaviour
 
     public float speed;
 
+    public bool isLookingAround;
+
     public float timeUntilGiveUpChase;
 
     // Start is called before the first frame update
@@ -48,6 +50,7 @@ public class EnemyAI : MonoBehaviour
         centerOfMass = GetComponent<Transform>().Find("CenterOfMass");
         timeLeftUntilGiveUpChase = 0;
         hasDestination = false;
+        isLookingAround = false;
     }
 
     // Update is called once per frame
@@ -156,10 +159,12 @@ public class EnemyAI : MonoBehaviour
         }
 
         //look around
+        isLookingAround = false;
         if ((timeLeftUntilGiveUpChase > 0 && currentState == State.Player && detector.detectedPlayer == null && currentPath == null && !hasDestination) ||
             (timeLeftUntilGiveUpDistraction > 0 && currentState == State.Target && currentPath == null && !hasDestination))
         {
             LookAround();
+            isLookingAround = true;
         }
 
     }
