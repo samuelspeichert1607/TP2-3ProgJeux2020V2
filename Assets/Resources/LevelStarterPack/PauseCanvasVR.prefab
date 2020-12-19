@@ -1699,7 +1699,7 @@ MonoBehaviour:
   m_UpdateTrackingType: 0
   m_EnableInputActions: 1
   m_PoseProvider: {fileID: 0}
-  m_ControllerNode: 4
+  m_ControllerNode: 0
   m_SelectUsage: 3
   m_ActivateUsage: 2
   m_UIPressUsage: 2
@@ -2171,7 +2171,7 @@ MonoBehaviour:
   m_UpdateTrackingType: 0
   m_EnableInputActions: 1
   m_PoseProvider: {fileID: 0}
-  m_ControllerNode: 5
+  m_ControllerNode: 0
   m_SelectUsage: 3
   m_ActivateUsage: 2
   m_UIPressUsage: 2
