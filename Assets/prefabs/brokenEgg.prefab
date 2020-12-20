@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 4962133704648626553}
   - component: {fileID: 7641359715704134979}
   - component: {fileID: 5445875806949882015}
+  - component: {fileID: 1480644640472162806}
   m_Layer: 0
   m_Name: brokenEgg
   m_TagString: Untagged
@@ -337,3 +338,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1480644640472162806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7488913688615969059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 900001d2af079be4c929476893f766a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eggEffect: {fileID: 1146686278870987359, guid: 961272b3786b0ad4e9ab699a4655086b, type: 3}

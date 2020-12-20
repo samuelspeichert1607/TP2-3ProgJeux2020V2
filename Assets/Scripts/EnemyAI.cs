@@ -41,8 +41,10 @@ public class EnemyAI : MonoBehaviour
 
     public float timeUntilGiveUpChase;
 
+    public Animator animator;
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         GameObject graph = GameObject.Find("Graph");
         pathFinding = graph.GetComponent<Graph>();
@@ -51,11 +53,16 @@ public class EnemyAI : MonoBehaviour
         timeLeftUntilGiveUpChase = 0;
         hasDestination = false;
         isLookingAround = false;
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
+
+        animator.SetBool("isLookingAround", isLookingAround);
+        animator.SetFloat("speed", speed);
+
         if (timeLeftUntilGiveUpChase > 0)
         {
             timeLeftUntilGiveUpChase -= Time.deltaTime;

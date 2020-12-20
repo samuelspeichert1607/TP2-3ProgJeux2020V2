@@ -1511,7 +1511,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultRooms:
   - Name: Test
-    sceneIndex: 6
+    sceneIndex: 5
     maxPlayer: 4
   - Name: Fun Room
     sceneIndex: 5
