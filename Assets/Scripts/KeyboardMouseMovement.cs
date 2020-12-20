@@ -20,6 +20,8 @@ public class KeyboardMouseMovement : MonoBehaviour
 
     public float speed;
 
+    private Animator animator;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -31,6 +33,7 @@ public class KeyboardMouseMovement : MonoBehaviour
         head = trans.gameObject;
         soundShpere = GameObject.Find("SoundMade").GetComponent<SphereCollider>();
         soundShpereInfo = soundShpere.GetComponent<SoundInfo>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -70,5 +73,13 @@ public class KeyboardMouseMovement : MonoBehaviour
             }
             isCrouched = !isCrouched;
         }
+
+        animator.SetFloat("speed", speed);
+        animator.SetBool("isCrouched", isCrouched);
+    }
+
+    public bool IsCrouched()
+    {
+        return isCrouched;
     }
 }

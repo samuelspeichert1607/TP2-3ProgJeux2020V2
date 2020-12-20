@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Pausable
   - DifficultyMode
+  - Legs
   layers:
   - Default
   - TransparentFX

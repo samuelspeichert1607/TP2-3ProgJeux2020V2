@@ -954,7 +954,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1573,10 +1573,10 @@ RectTransform:
   m_Father: {fileID: 1555686942}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 60, y: -70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &370513337
 MonoBehaviour:
@@ -1591,7 +1591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -8686,6 +8686,14 @@ MonoBehaviour:
   difficultyMode: 0
   MusicVolume: 0
   SoundEffectVolume: 0
+  possibleAvatars:
+  - {fileID: 23667613311941779, guid: ce837f456a4c9824da30e24142d69260, type: 3}
+  - {fileID: 6896932359464057148, guid: 0d9977916353ee744a47a418a4c3adb3, type: 3}
+  avatarChoisi: {fileID: 0}
+  armSize: {x: 0, y: 0, z: 0}
+  legSize: {x: 0, y: 0, z: 0}
+  firstColor: {r: 0, g: 0, b: 0, a: 0}
+  secondColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!4 &882051896
 Transform:
   m_ObjectHideFlags: 0
@@ -8694,7 +8702,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 882051894}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.7054584, y: -1.9848042, z: -13.420444}
+  m_LocalPosition: {x: -2.7054584, y: -226.5, z: -13.420444}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -15586,7 +15594,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad: Lobby
-  optionsParticle: {fileID: 0}
   optionsButton: {fileID: 0}
 --- !u!224 &1290379176
 RectTransform:
@@ -16590,10 +16597,10 @@ RectTransform:
   m_Father: {fileID: 1165428062}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 160}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 172.5}
+  m_SizeDelta: {x: -1048, y: -625}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1548600453
 MonoBehaviour:
@@ -22981,7 +22988,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad: Lobby
-  optionsParticle: {fileID: 0}
   optionsButton: {fileID: 1509356062}
 --- !u!114 &1904889824
 MonoBehaviour:
@@ -23801,8 +23807,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 124}
-  m_SizeDelta: {x: 60, y: -70}
+  m_AnchoredPosition: {x: 0, y: 231.5}
+  m_SizeDelta: {x: 60, y: 145}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2063875690
 MonoBehaviour:

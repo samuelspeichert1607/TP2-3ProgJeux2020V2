@@ -32,8 +32,7 @@ public class NetworkPlayer : MonoBehaviour
         {
             isVR = globalControl.GetComponent<SceneControl>().IsVRActivated;
         }
-
-
+        
         if (isVR)
         {
             headRig = rig.transform.Find("CameraOffset/VR Camera");

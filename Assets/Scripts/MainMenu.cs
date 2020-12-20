@@ -8,9 +8,6 @@ public class MainMenu : MonoBehaviour
     private string sceneToLoad;
 
     [SerializeField]
-    private GameObject optionsParticle;
-
-    [SerializeField]
     private GameObject optionsButton;
 
     private void Awake()
@@ -24,13 +21,6 @@ public class MainMenu : MonoBehaviour
         FindObjectOfType<ProgressSceneLoader>().LoadScene(sceneToLoad);
         gameObject.SetActive(false);
         FindObjectOfType<ProgressSceneLoader>().LoadScene(sceneToLoad);
-    }
-
-    public void OptionsGame()
-    {
-        //Instantiate(optionsParticle, optionsButton.GetComponent<RectTransform>().anchoredPosition, Quaternion.identity);
-        //optionsParticle.SetActive(true);
-        optionsParticle.GetComponent<ParticleSystem>().Play();
     }
 
     public void QuitGame()
