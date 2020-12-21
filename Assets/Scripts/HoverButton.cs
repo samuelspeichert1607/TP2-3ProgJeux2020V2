@@ -13,7 +13,6 @@ public class HoverButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public void OnPointerEnter(PointerEventData eventData)
     {
         rectTransform.localScale = Lerping(rectTransform.localScale, new Vector3(1.2f, 1.2f, 1.2f), 0, 1);
-        //new Vector3(1.2f, 1.2f, 1.2f);
     }
 
     public void OnPointerExit(PointerEventData eventData)

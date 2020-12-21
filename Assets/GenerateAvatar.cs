@@ -11,7 +11,6 @@ public class GenerateAvatar : MonoBehaviour
         globalControl = GameObject.Find("GlobalGameController").GetComponent<GlobalControl>();
         GameObject avatar = globalControl.BuildAvatar();
         avatar.transform.position = gameObject.transform.position;
-        
         avatar.transform.parent = gameObject.transform;
     }
 }

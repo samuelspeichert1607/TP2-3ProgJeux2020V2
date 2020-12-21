@@ -6,8 +6,7 @@ public class TitleScreenManager : MonoBehaviour
 {
     [SerializeField]
     private GameObject mainMenu;
-
-    // Update is called once per frame
+    
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Return))

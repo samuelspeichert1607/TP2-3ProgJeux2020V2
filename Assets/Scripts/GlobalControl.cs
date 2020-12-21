@@ -34,6 +34,10 @@ public class GlobalControl : MonoBehaviour
     private void Awake()
     {
         avatarChoisi = possibleAvatars[0];
+        firstColor = Color.white;
+        secondColor = Color.white;
+        legSize = new Vector3(1f, 1f, 1f);
+        armSize = new Vector3(1f, 1f, 1f);
 
         if (Instance == null)
         {
@@ -59,35 +63,6 @@ public class GlobalControl : MonoBehaviour
 
         return avatar;
     }
-
-    private void ChangeLegs(ref GameObject avatar)
-    {
-        if (avatar.name == "Robot Kyle Keyboard(Clone)")
-        {
-            GameObject legs = GameObject.Find("Hip");
-            legs.transform.localScale = legSize;
-        }
-        else if (avatar.name == "Skeleton Keyboard(Clone)")
-        {
-            GameObject legs = GameObject.Find("Bip01_Pelvis");
-            legs.transform.localScale = legSize;
-        }
-    }
-
-    private void ChangeArms(ref GameObject avatar)
-    {
-        if (avatar.name == "Robot Kyle Keyboard(Clone)")
-        {
-            GameObject arms = GameObject.Find("Ribs");
-            arms.transform.localScale = armSize;
-        }
-        else if (avatar.name == "Skeleton Keyboard(Clone)")
-        {
-            GameObject arms = GameObject.Find("Bip01_Spine");
-            arms.transform.localScale = armSize;
-        }
-    }
-
 
     public void Avatar1Choisi()
     {

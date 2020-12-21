@@ -10,8 +10,12 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     private GameObject optionsButton;
 
+    private AudioSource audio;
+
     private void Awake()
     {
+        audio = GetComponent<AudioSource>();
+        audio.Play();
         GetComponentInChildren<Button>().onClick.AddListener(PlayGame);
     }
 
