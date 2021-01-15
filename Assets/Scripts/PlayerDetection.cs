@@ -70,33 +70,36 @@ public class PlayerDetection : MonoBehaviour
                 if (hearingColliders[i].GetComponentInParent<CharacterController>() != null)
                 {
                     SoundInfo info = hearingColliders[i].GetComponent<SoundInfo>();
-                    if (info.isMakingSound)
+                    if(info != null)
                     {
-                        GameObject player = hearingColliders[i].GetComponentInParent<CharacterController>().gameObject;
-                        Transform sound = player.GetComponent<Transform>().Find("SoundMade");
-                        Vector3 direction = sound.position - centerOfMass.position;
-                        float distance = Vector3.Distance(centerOfMass.position, sound.position);
-                        RaycastHit[] hits;
-                        hits = Physics.RaycastAll(centerOfMass.position, direction, distance);
-                        bool canHearObject = true;
-                        for (int j = 0; j < hits.Length; j++)
+                        if (info.isMakingSound)
                         {
-                            if (hits[j].collider.GetComponent<ObjectAIBehavior>() != null)
+                            GameObject player = hearingColliders[i].GetComponentInParent<CharacterController>().gameObject;
+                            Transform sound = player.GetComponent<Transform>().Find("SoundMade");
+                            Vector3 direction = sound.position - centerOfMass.position;
+                            float distance = Vector3.Distance(centerOfMass.position, sound.position);
+                            RaycastHit[] hits;
+                            hits = Physics.RaycastAll(centerOfMass.position, direction, distance);
+                            bool canHearObject = true;
+                            for (int j = 0; j < hits.Length; j++)
                             {
-                                ObjectAIBehavior behavior = hits[j].collider.GetComponent<ObjectAIBehavior>();
-                                if (!behavior.canSoundPassThrough)
+                                if (hits[j].collider.GetComponent<ObjectAIBehavior>() != null)
                                 {
-                                    canHearObject = false;
-                                    break;
+                                    ObjectAIBehavior behavior = hits[j].collider.GetComponent<ObjectAIBehavior>();
+                                    if (!behavior.canSoundPassThrough)
+                                    {
+                                        canHearObject = false;
+                                        break;
+                                    }
                                 }
                             }
-                        }
 
-                        if (canHearObject)
-                        {
-                            detectedPlayer = player;
+                            if (canHearObject)
+                            {
+                                detectedPlayer = player;
+                            }
+                            break;
                         }
-                        break;
                     }
                 }
             }

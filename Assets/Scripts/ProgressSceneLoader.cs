@@ -51,13 +51,17 @@ public class ProgressSceneLoader : MonoBehaviour
     {
         operation = SceneManager.LoadSceneAsync(sceneName);
 
-        while (!operation.isDone)
+        if(operation != null)
         {
-            UpdateProgressUI(operation.progress);
-            yield return null;
-        }
+            while (!operation.isDone)
+            {
+                UpdateProgressUI(operation.progress);
+                yield return null;
+            }
 
-        UpdateProgressUI(operation.progress);
+            UpdateProgressUI(operation.progress);
+
+        }
         operation = null;
         canvas.gameObject.SetActive(false);
     }

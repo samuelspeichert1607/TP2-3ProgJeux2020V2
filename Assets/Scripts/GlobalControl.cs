@@ -52,7 +52,7 @@ public class GlobalControl : MonoBehaviour
         }
     }
 
-    public GameObject BuildAvatar()
+    /*public GameObject BuildAvatar()
     {
         GameObject avatar = Instantiate(avatarChoisi, gameObject.transform.position, Quaternion.identity);
 
@@ -62,7 +62,7 @@ public class GlobalControl : MonoBehaviour
         avatar.GetComponentInChildren<ChangeArmSize>().ChangeSize(armSize);
 
         return avatar;
-    }
+    }*/
 
     public void Avatar1Choisi()
     {

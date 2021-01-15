@@ -74,8 +74,8 @@ public class KeyboardMouseMovement : MonoBehaviour
             isCrouched = !isCrouched;
         }
 
-        animator.SetFloat("speed", speed);
-        animator.SetBool("isCrouched", isCrouched);
+        /*animator.SetFloat("speed", speed);
+        animator.SetBool("isCrouched", isCrouched);*/
     }
 
     public bool IsCrouched()
